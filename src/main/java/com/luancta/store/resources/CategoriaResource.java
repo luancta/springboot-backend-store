@@ -51,7 +51,8 @@ public class CategoriaResource {
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		//NOTA: @pathVariable mapeia o parametro da URL /{id} na variavel id Integer
 		
-		Categoria obj = service.buscar(id);
+//		Categoria obj = service.buscar(id);
+		Categoria obj = service.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 }

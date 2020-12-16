@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -35,6 +37,7 @@ public class Produto implements Serializable {
 	private String nome;
 	private Double preco;
 	
+	@JsonBackReference //XXX: @JsonBackReference indica que a busca será realizada pelo outro lado do mapeamento categoria.getprodutos() 
 	@ManyToMany
 	@JoinTable(name = "produto_categoria", 
 		joinColumns = @JoinColumn(name = "id_produto"),
