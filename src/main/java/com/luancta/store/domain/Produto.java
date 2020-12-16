@@ -8,30 +8,38 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Categoria implements Serializable {
+public class Produto implements Serializable {
 
-	public Categoria(int id, String nome) {
-		this.id = id;
+	public Produto( String nome, double preco) {
 		this.nome = nome;
+		this.preco = preco;
 	}
 
 	private static final long serialVersionUID = 1L;
-
+	
+	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	private Double preco;
 	
-	@ManyToMany(mappedBy = "categorias")
-	private List<Produto> produtos = new ArrayList<>();
+	@ManyToMany
+	@JoinTable(name = "produto_categoria", 
+		joinColumns = @JoinColumn(name = "id_produto"),
+		inverseJoinColumns = @JoinColumn(name = "id_categoria")
+	)
+	private List<Categoria> categorias = new ArrayList<>();
+
 }
